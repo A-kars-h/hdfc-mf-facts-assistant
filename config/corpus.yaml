@@ -1,0 +1,39 @@
+# Corpus definition — mutual fund FAQ assistant
+# Source of truth for the committed corpus. Source: docs/problemstatement.txt
+# AMC is fixed (HDFC). Schemes are fixed (5, all Direct-Growth).
+# Do not add pages from third-party blogs (source line 39: public sources only).
+#
+# Only the 5 URLs below are known-good. Never infer or generate a URL here.
+
+amc: HDFC Asset Management
+plan_variant: Direct Growth
+
+# Minimum extractable characters for a page to be considered usable.
+# A page below this is a HARD FAIL, not a warning (FR-2).
+min_extract_chars: 1500
+
+pages:
+  - page_id: hdfc-large-cap
+    scheme: HDFC Large Cap Fund - Direct Growth
+    category: Large Cap
+    source_url: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+
+  - page_id: hdfc-equity
+    scheme: HDFC Equity Fund - Direct Growth
+    category: Flexi Cap
+    source_url: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+
+  - page_id: hdfc-elss
+    scheme: HDFC ELSS Tax Saver Fund - Direct Plan - Growth
+    category: ELSS
+    source_url: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+
+  - page_id: hdfc-small-cap
+    scheme: HDFC Small Cap Fund - Direct Growth
+    category: Small Cap
+    source_url: https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth
+
+  - page_id: hdfc-balanced
+    scheme: HDFC Balanced Advantage Fund - Direct Growth
+    category: Balanced Advantage
+    source_url: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth

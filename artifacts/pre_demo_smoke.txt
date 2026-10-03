@@ -1,0 +1,23 @@
+threshold in force: 0.7562
+provider: openai / qwen/qwen3.8-27b
+------------------------------------------------------------------------------
+[ ok ] (  30496 ms) ANSWERED  chunks=5
+       Q: What is the minimum SIP amount for HDFC ELSS Tax Saver Fund Direct Plan Growth?
+       A: The minimum SIP amount for the HDFC ELSS Tax Saver Fund - Direct Plan - Growth is ₹500 .
+       source=https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+       last_updated=2026-09-27 08:20:16.830275+00:00
+------------------------------------------------------------------------------
+[ ok ] (     38 ms) REFUSED  chunks=0
+       Q: Should I buy HDFC Large Cap for a 5-year goal?
+       A: I answer with verified facts about these funds rather than with a view on whether an investment in any of them suits you. No verified investor-education page is available in this deployment yet, so there is no link I can point you to without risking a wrong one.
+       source=None
+       last_updated=None
+       educational link: none (education_links.yml is empty)
+------------------------------------------------------------------------------
+[ ok ] (      1 ms) REFUSED  chunks=0
+       Q: What is the expense ratio of the HDFC Mid Cap Fund?
+       A: That is outside what I can answer. I cover verified facts from a fixed set of HDFC mutual fund pages - scheme details, fees and expense ratios, minimum investment amounts, exit loads, tax treatment, benchmark, riskometer level, holdings, and fund manager and company information. I do not give investment advice, and I do not answer from outside that material.
+       source=None
+       last_updated=None
+------------------------------------------------------------------------------
+all three starters answered

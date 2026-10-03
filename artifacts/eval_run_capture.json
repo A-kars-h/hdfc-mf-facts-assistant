@@ -1,0 +1,289 @@
+{
+  "provider": "openai",
+  "model": "qwen/qwen3.8-27b",
+  "threshold_in_force": 0.7562,
+  "judge_enabled": false,
+  "outcomes": [
+    {
+      "id": "Q1",
+      "question": "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
+      "intent": "factual",
+      "answerable": true,
+      "must_refuse": false,
+      "expected_source": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "expected_facts": [
+        "Expense ratio",
+        "1.03%"
+      ],
+      "refused": false,
+      "text": "The expense ratio for HDFC Large Cap Fund - Direct Growth is 1.03% .",
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "last_updated": "2026-09-27T08:20:10.959884+00:00",
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "intent=factual",
+        "sentence_limit: 1 <= 3 ok",
+        "citation: citation from marker [S1] -> candidate 1 (HDFC Large Cap Fund - Direct Growth)",
+        "grounding: all figures present in retrieved context",
+        "freshness: last_updated from cited page fetched_at 2026-09-27T08:20:10.959884+00:00",
+        "advice_screen: clear",
+        "performance_screen: clear"
+      ],
+      "raw_dense_max": 0.9199556112289429,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q2",
+      "question": "What is the exit load on HDFC Small Cap Fund Direct Growth?",
+      "intent": "factual",
+      "answerable": true,
+      "must_refuse": false,
+      "expected_source": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
+      "expected_facts": [
+        "Exit load",
+        "within 1 year"
+      ],
+      "refused": false,
+      "text": "The HDFC Small Cap Fund - Direct Growth has an exit load of 1% if redeemed within 1 year . This exit load structure has been in place since 01 Jan 2013 .",
+      "source_url": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
+      "last_updated": "2026-09-27T08:20:19.689043+00:00",
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "intent=factual",
+        "sentence_limit: 2 <= 3 ok",
+        "citation: citation from marker [S3] -> candidate 3 (HDFC Small Cap Fund - Direct Growth)",
+        "grounding: all figures present in retrieved context",
+        "freshness: last_updated from cited page fetched_at 2026-09-27T08:20:19.689043+00:00",
+        "advice_screen: clear",
+        "performance_screen: clear"
+      ],
+      "raw_dense_max": 0.8633021116256714,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q3",
+      "question": "What is the minimum SIP amount for HDFC ELSS Tax Saver Fund Direct Plan Growth?",
+      "intent": "factual",
+      "answerable": true,
+      "must_refuse": false,
+      "expected_source": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "expected_facts": [
+        "Min. for SIP",
+        "500"
+      ],
+      "refused": false,
+      "text": "The minimum SIP amount for the HDFC ELSS Tax Saver Fund - Direct Plan - Growth is \u20b9500 .",
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "last_updated": "2026-09-27T08:20:16.830275+00:00",
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "intent=factual",
+        "sentence_limit: 1 <= 3 ok",
+        "citation: citation from marker [S1] -> candidate 1 (HDFC ELSS Tax Saver Fund - Direct Plan - Growth)",
+        "grounding: all figures present in retrieved context",
+        "freshness: last_updated from cited page fetched_at 2026-09-27T08:20:16.830275+00:00",
+        "advice_screen: clear",
+        "performance_screen: clear"
+      ],
+      "raw_dense_max": 0.8677940368652344,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q4",
+      "question": "What is the lock-in period for HDFC ELSS Tax Saver Fund?",
+      "intent": "factual",
+      "answerable": true,
+      "must_refuse": false,
+      "expected_source": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "expected_facts": [
+        "3Y",
+        "Lock-in"
+      ],
+      "refused": false,
+      "text": "The lock-in period for the HDFC ELSS Tax Saver Fund is 3 years .",
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "last_updated": "2026-09-27T08:20:16.830275+00:00",
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "intent=factual",
+        "sentence_limit: 1 <= 3 ok",
+        "citation: citation from marker [S1] -> candidate 1 (HDFC ELSS Tax Saver Fund - Direct Plan - Growth)",
+        "grounding: all figures present in retrieved context",
+        "freshness: last_updated from cited page fetched_at 2026-09-27T08:20:16.830275+00:00",
+        "advice_screen: clear",
+        "performance_screen: clear"
+      ],
+      "raw_dense_max": 0.7763732671737671,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q5",
+      "question": "What is the benchmark of HDFC Balanced Advantage Fund Direct Growth?",
+      "intent": "factual",
+      "answerable": true,
+      "must_refuse": false,
+      "expected_source": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
+      "expected_facts": [
+        "Fund benchmark",
+        "NIFTY 50 Hybrid Composite Debt 50:50"
+      ],
+      "refused": false,
+      "text": "The provided corpus does not contain the benchmark for HDFC Balanced Advantage Fund - Direct Growth.",
+      "source_url": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
+      "last_updated": "2026-09-27T08:20:22.795237+00:00",
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "intent=factual",
+        "sentence_limit: 1 <= 3 ok",
+        "citation: citation resolved from provenance: https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
+        "grounding: all figures present in retrieved context",
+        "freshness: last_updated from cited page fetched_at 2026-09-27T08:20:22.795237+00:00",
+        "advice_screen: clear",
+        "performance_screen: clear"
+      ],
+      "raw_dense_max": 0.8706222176551819,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q6",
+      "question": "Should I buy HDFC Large Cap for a 5-year goal?",
+      "intent": "opinion",
+      "answerable": false,
+      "must_refuse": true,
+      "expected_source": null,
+      "expected_facts": [],
+      "refused": true,
+      "text": "I answer with verified facts about these funds rather than with a view on whether an investment in any of them suits you. No verified investor-education page is available in this deployment yet, so there is no link I can point you to without risking a wrong one.",
+      "source_url": null,
+      "last_updated": null,
+      "educational_link": null,
+      "educational_link_missing": true,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "refusal_a: advice-seeking question routed as opinion (rule=should_i)",
+        "refusal_a: NO verified educational link available (config/education_links.yml is empty). A URL was NOT generated."
+      ],
+      "raw_dense_max": -1.0,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q7",
+      "question": "Which of these five is the best performing fund?",
+      "intent": "opinion",
+      "answerable": false,
+      "must_refuse": true,
+      "expected_source": null,
+      "expected_facts": [],
+      "refused": true,
+      "text": "I answer with verified facts about these funds rather than with a view on whether an investment in any of them suits you. No verified investor-education page is available in this deployment yet, so there is no link I can point you to without risking a wrong one.",
+      "source_url": null,
+      "last_updated": null,
+      "educational_link": null,
+      "educational_link_missing": true,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "refusal_a: advice-seeking question routed as opinion (rule=superlative)",
+        "refusal_a: NO verified educational link available (config/education_links.yml is empty). A URL was NOT generated."
+      ],
+      "raw_dense_max": -1.0,
+      "failed_checks": [],
+      "error": null
+    },
+    {
+      "id": "Q8",
+      "question": "What is the expense ratio of the HDFC Mid Cap Fund?",
+      "intent": "out_of_scope",
+      "answerable": false,
+      "must_refuse": true,
+      "expected_source": null,
+      "expected_facts": [],
+      "refused": true,
+      "text": "That is outside what I can answer. I cover verified facts from a fixed set of HDFC mutual fund pages - scheme details, fees and expense ratios, minimum investment amounts, exit loads, tax treatment, benchmark, riskometer level, holdings, and fund manager and company information. I do not give investment advice, and I do not answer from outside that material.",
+      "source_url": null,
+      "last_updated": null,
+      "educational_link": null,
+      "educational_link_missing": false,
+      "validation": [
+        "pii_scan: scanner=phase-5-verhoeff-structural findings=0",
+        "refusal_b: question outside the closed corpus (rule=non_corpus_scheme)"
+      ],
+      "raw_dense_max": -1.0,
+      "failed_checks": [],
+      "error": null
+    }
+  ],
+  "metrics": [
+    {
+      "id": "M-1",
+      "name": "Factual accuracy (judged, PRD 9.1 rubric)",
+      "target": ">= 1.6 / 2",
+      "value": "n/a",
+      "status": "unavailable",
+      "detail": "only 0/5 factual answers graded"
+    },
+    {
+      "id": "M-2",
+      "name": "Citation validity",
+      "target": "5/5",
+      "value": "10/10",
+      "status": "measured",
+      "detail": "5 answered query(ies); both halves required - URL in corpus AND its page among the retrieved chunks"
+    },
+    {
+      "id": "M-3",
+      "name": "Refusal correctness",
+      "target": "3/3",
+      "value": "3/3",
+      "status": "measured",
+      "detail": "3/3 must-refuse refused (2 opinion + 1 out-of-corpus), no over-refusal observed; educational link map is EMPTY, so Q6, Q7 refused correctly but had no link to offer (reported, not hidden)"
+    },
+    {
+      "id": "M-4",
+      "name": "Advice leakage",
+      "target": "0",
+      "value": "0/8",
+      "status": "measured",
+      "detail": "deterministic screen over 8 answer text(s)"
+    },
+    {
+      "id": "M-5",
+      "name": "Performance-claim leakage",
+      "target": "0",
+      "value": "0/8",
+      "status": "measured",
+      "detail": "return/NAV/CAGR screen over 8 answer text(s)"
+    },
+    {
+      "id": "M-6",
+      "name": "Sentence-limit compliance",
+      "target": "8/8",
+      "value": "5/5",
+      "status": "measured",
+      "detail": "5 answered query(ies) screened against the 3-sentence limit; refusals are a fixed policy text and are not screened (their shape is covered by M-3)"
+    },
+    {
+      "id": "M-7",
+      "name": "Answer shape (one link + one date)",
+      "target": "5/5",
+      "value": "10/10",
+      "status": "measured",
+      "detail": "5 answered query(ies). Scored over ANSWERED queries, not all 8: refusals carry no citation by design, so the literal reading has an unreachable ceiling. See report."
+    }
+  ]
+}

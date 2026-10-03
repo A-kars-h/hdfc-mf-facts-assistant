@@ -1,0 +1,38 @@
+# PII detection fixtures - NEGATIVE near-miss cases
+#
+# Format:  <question text>
+#
+# One case per line. These MUST NOT trip any detector.
+#
+# This file is the reason the brief's phrase "regex + checksum validation" is not
+# enough on its own. Every line here is an ordinary question a user would ask this
+# assistant, and a regex that matches a bare 4-6 digit run or an unanchored
+# identifier shape will flag it. The detector rules in pii.py are shaped by these
+# lines as much as by the positive file - in particular DETECT_BARE_OTP_NUMBERS
+# exists because of lines like the holdings row and the "500000" goal.
+#
+# Blank lines and lines starting with '#' are ignored.
+The expense ratio of the fund is 1.03%
+expense ratio 1.2345
+the year 2026
+as on 31 March 2026
+NAV was 54.3210
+returns of 12.5% p.a. over 5 years
+expense ratio 0.58 and returns 14.2
+invested Rs 500 for 3 years
+invested 1,00,000 monthly via SIP
+goal is 500000 in 10 years
+target corpus 300000
+order id ORD50231 failed
+ref no INV-90210
+GOVERNMENT OF INDIA 34238 GOI 22AP64 7.34 FV RS 100
+STATE DEVELOPMENT LOAN 36823 GUJ 17DC34 7.27 FV RS 100
+HDFC Balanced Advantage Fund Direct Growth
+what is the exit load
+Should I invest in a large cap fund for 5 years
+how do I switch from direct to dividend plan
+compare the expense ratio and 3 year returns of HDFC Balanced Advantage Fund
+what is the minimum investment amount
+is 1.03% a good expense ratio
+my SIP is 5000 per month for 10 years
+how much corpus is needed to get 1 crore

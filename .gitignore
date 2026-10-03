@@ -1,0 +1,47 @@
+# Secrets - never commit. .env.example is the committed template.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated indexes - rebuildable from data/raw with `make ingest`.
+# NOT ignored on purpose: data/raw holds the fetched HTML, which is the
+# provenance record behind every citation. Keeping it in the repo means the
+# demo runs offline and a reviewer can verify any answer against the exact
+# bytes that produced it.
+data/chroma/
+data/bm25.pkl
+*.pkl
+
+# Streamlit local credentials. config.toml IS committed on purpose - it records
+# the deliberate 127.0.0.1 bind. secrets.toml is Streamlit's credential store
+# and must never be.
+.streamlit/secrets.toml
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime logs from `make run` / the eval capture scripts.
+*.log
+*.err
+
+# Evaluation scratch. Golden sets ARE committed - the source requires the
+# eval set to be human-reviewed and expandable.
+artifacts/runs/
+*.tmp

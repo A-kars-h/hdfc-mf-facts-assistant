@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-09-27T10:37:50.437328Z",
+  "amc": "HDFC Asset Management",
+  "plan_variant": "Direct Growth",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dim": 384,
+  "chunk_size": 200,
+  "chunk_overlap": 40,
+  "pages": [
+    {
+      "page_id": "hdfc-large-cap",
+      "scheme": "HDFC Large Cap Fund - Direct Growth",
+      "category": "Large Cap",
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "fetched_at": "2026-09-27T08:20:10.959884Z",
+      "chunks": 157,
+      "content_hash": "959aa0c4377129291d2e52acb59513f92f15d35202f17a7aa1531b6ca9a3580b"
+    },
+    {
+      "page_id": "hdfc-equity",
+      "scheme": "HDFC Equity Fund - Direct Growth",
+      "category": "Flexi Cap",
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "fetched_at": "2026-09-27T08:20:13.609948Z",
+      "chunks": 191,
+      "content_hash": "6f12cb72da962fbb59449f8fcbf99459ce297ecf7fde7d6001712e0b2a795df1"
+    },
+    {
+      "page_id": "hdfc-elss",
+      "scheme": "HDFC ELSS Tax Saver Fund - Direct Plan - Growth",
+      "category": "ELSS",
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "fetched_at": "2026-09-27T08:20:16.830275Z",
+      "chunks": 165,
+      "content_hash": "fb33367087d12cba33ca5b20b4a9437f4588deee3bbe15a86bedf170613dbb4b"
+    },
+    {
+      "page_id": "hdfc-small-cap",
+      "scheme": "HDFC Small Cap Fund - Direct Growth",
+      "category": "Small Cap",
+      "source_url": "https://groww.in/mutual-funds/hdfc-small-cap-fund-direct-growth",
+      "fetched_at": "2026-09-27T08:20:19.689043Z",
+      "chunks": 200,
+      "content_hash": "ccdc327bd56dc68f75e2440cc409e5b42e50f4e88d2d30f385a9b69ed76105b0"
+    },
+    {
+      "page_id": "hdfc-balanced",
+      "scheme": "HDFC Balanced Advantage Fund - Direct Growth",
+      "category": "Balanced Advantage",
+      "source_url": "https://groww.in/mutual-funds/hdfc-balanced-advantage-fund-direct-growth",
+      "fetched_at": "2026-09-27T08:20:22.795237Z",
+      "chunks": 480,
+      "content_hash": "3ceda95baf4b852d63beb8f0085b89ec87138b690edfc50d26ee97499c5b7519"
+    }
+  ],
+  "totals": {
+    "pages": 5,
+    "chunks": 1193,
+    "failed": 0,
+    "skipped": 5
+  }
+}

@@ -1,0 +1,36 @@
+# PII detection fixtures - POSITIVE cases
+#
+# Format:  <expected_kind> <TAB> <question text>
+#
+# Every identifier here is SYNTHETIC. Aadhaar values are produced by
+# verhoeff_check_digit() from an arbitrary 11-digit payload, so they are valid by
+# construction and are not any real person's number. PANs use the published
+# 4th-character entity-type codes with obviously fictional letters. Do not
+# replace these with real values copied from anywhere - that would put genuine
+# personal data in the repository, which is the exact failure this module exists
+# to prevent.
+#
+# Load-bearing rule: a new detector added to pii.py MUST have a case here. A
+# detector with no fixture is a detector nobody has ever seen fire.
+pan	My PAN is ABCPA1234B
+pan	pan aaapa1234b
+pan	Please check PAN number ABCPA1234B for my filing
+pan	permanent account number: ABCPA1234B
+aadhaar	My aadhaar is 379980670381
+aadhaar	aadhaar 3799 8067 0381 linked to my bank
+aadhaar	Aadhaar number 379980670381 needs updating
+account	a/c no. 30123456789 please check
+account	account number 98765432101
+account	acc no 123456789012
+account	account: 4001234567890123
+otp	my otp is 492015
+otp	verification code 1234
+otp	security code 45678
+otp	pin 4321
+otp	one time password 987654
+email	mail me at ravi.kumar@example.co.in
+email	contact r.kumar+funds@example.co.in please
+phone	call me on +91 98765 43210
+phone	my number is 9876543210
+phone	+91-98765-43210
+phone	reach me at 098765 43210

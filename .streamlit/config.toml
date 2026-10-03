@@ -1,0 +1,29 @@
+# Streamlit configuration for the Phase 7 UI.
+#
+# Binds to 127.0.0.1 ONLY. This is a local demo with no auth and no persistence
+# across restarts (architecture §2.4, AD-13), so binding to 0.0.0.0 would put an
+# unauthenticated assistant that reads a local financial corpus on the network.
+# The default is loopback, but it is set explicitly here so the correct behaviour
+# does not depend on a Streamlit default or on the flags a caller happens to pass.
+[server]
+address = "127.0.0.1"
+port = 8501
+headless = true
+# Hot reload is off, and that is a deliberate deployment choice rather than a
+# default. Streamlit's watcher resolves the source path of every module already
+# in `sys.modules`, which here means the whole `transformers` package - it is
+# pulled in transitively by sentence-transformers. `transformers` resolves its
+# submodules through a lazy `__getattr__`, so the watcher tries to *import* each
+# of its ~200 vision and audio model modules just to ask for a path. Every one of
+# them fails on the missing `torchvision`, and the watcher logs a full traceback
+# for each: 1,943 lines and 102 tracebacks in the console of an app that is
+# working perfectly. Verified against the running app - not one of those lines
+# came from this script.
+#
+# Off also means the app cannot rerun itself mid-demo because some unrelated
+# file changed, which for a read-only demo is a feature. The cost is that editing
+# `ui/app.py` needs a server restart; `make run` does that.
+fileWatcherType = "none"
+
+[browser]
+gatherUsageStats = false

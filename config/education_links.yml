@@ -1,0 +1,48 @@
+# Verified educational links for OPINION refusals.
+#
+# WHY THIS FILE IS EMPTY
+# ----------------------
+# The source (problemstatement.txt line 36) requires the assistant to refuse
+# advice-seeking questions AND offer a relevant educational link. It does not
+# permit inventing one.
+#
+# A language model asked to "suggest a link explaining what a mutual fund is"
+# will confidently produce a URL that 404s, redirects to a product page, or -
+# worse - a lookalike domain. A broken link in a refusal is worse than no link:
+# it looks compliant, so the M-3 refusal test passes while the user is sent
+# nowhere. Any evaluation that fills this file automatically stops measuring
+# anything real.
+#
+# So it ships empty, and every opinion refusal sets
+# `educational_link_missing=True`. That is the honest state: it is visible,
+# testable, and M-3 can distinguish "refused correctly" from "refused but had
+# nothing to offer".
+#
+# HOW TO FILL IT (a human task, ~20 minutes)
+# ------------------------------------------
+# 1. Open each URL below in a browser. Confirm it loads, is official, and
+#    actually explains the topic. Save a screenshot or note the date.
+# 2. Fill verified_by with your name and verified_on with an ISO date (YYYY-MM-DD).
+# 3. `load_education_links()` rejects entries missing either field, and
+#    `education_link_for()` only returns links on the allowlist in
+#    core/config.py. Both checks are deliberate - do not relax them to save time.
+#
+# CANDIDATES TO VERIFY (unverified until you have opened them)
+#   facts about vs factsheet concepts  -> HDFC AMC "Mutual Fund Factsheet" glossary
+#   exit load / how exit works          -> HDFC AMC "Exit Load" page
+#   ELSS 80C / 3-year lock-in           -> Income Tax Dept / ClearTax-style
+#                                         explainer, or HDFC AMC ELSS page
+#   SIP vs lumpsum                      -> HDFC AMC "Systematic Investment Plan"
+#   Direct vs Regular plan              -> HDFC AMC "Direct Plan" explainer
+#   who to consult before investing     -> SEBI / Investor.gov.in
+#
+# SCHEMA (one entry per Intent value, plus an optional `default`)
+# ---------------------------------------------------------------------------
+# links:
+#   <intent>:
+#     url: https://...
+#     title: "..."
+#     verified_by: your-name
+#     verified_on: 2026-01-15
+
+links: {}
