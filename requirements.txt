@@ -16,14 +16,48 @@
 #   pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
 #   pip install -r requirements.txt
 #
-# numpy is held at 1.25.2 deliberately. chromadb 1.5.9's compiled dependencies
-# (onnxruntime) are not compatible with numpy 2.x, and pip will otherwise
-# silently upgrade numpy into a broken state at the end of the resolve.
+# numpy is held in the 1.x line deliberately. chromadb 1.5.9's compiled
+# dependencies (onnxruntime) are not compatible with numpy 2.x, and pip will
+# otherwise silently upgrade numpy into a broken state at the end of the
+# resolve. 1.26.4 is the last numpy 1.x that ships cp312 wheels, so this is the
+# highest numpy that still satisfies that constraint - see DEPLOYMENT note below.
+#
+# --- DEPLOYMENT (Streamlit Community Cloud) ---------------------------------
+# Target Python 3.12, and set it in the Cloud dashboard under
+# "Advanced settings" -> Python version. That selection CANNOT be made from a
+# file in this repository: Community Cloud ignores `runtime.txt` and
+# `.python-version` (those are Heroku / pyenv conventions). See
+# docs.streamlit.io/deploy/streamlit-community-cloud/manage-your-app/upgrade-python
+#
+# Community Cloud used to default to 3.12 but now offers newer interpreters,
+# and it will pick one for you if you do not choose. On 3.13/3.14 the two pins
+# below have no prebuilt wheel, so pip falls back to building them from source
+# and the build fails - that is the `AttributeError: 'build_ext' object has no
+# attribute 'cython_sources'` failure mode, which is PyYAML 6.0's sdist being
+# incompatible with the Cython 3.x that modern setuptools pulls in.
+#
+# Wheel coverage on PyPI (linux, x86_64) is what forced these two versions:
+#   PyYAML 6.0   -> cp310, cp311 only          (no 3.12, no 3.14)
+#   PyYAML 6.0.3 -> cp310..cp314               <- pinned below
+#   numpy  1.25.2-> cp310, cp311 only          (no 3.12)
+#   numpy  1.26.4-> cp310, cp311, cp312        <- pinned below
+# 3.12 is the right target: it is the newest interpreter for which *every* pin
+# in this file resolves to a prebuilt wheel, so no source build runs at all.
+# (3.11 also works and would need no changes; 3.13+ cannot work without numpy
+# 2.x, which chromadb/onnxruntime rules out.)
+#
+# PyYAML 6.0.3 is also what is actually installed and was tested against in this
+# working environment - the previous `PyYAML==6.0` pin was stale and did not
+# match the machine it was verified on.
+# ----------------------------------------------------------------------------
 
 # --- core + corpus ---
 httpx==0.28.1
 beautifulsoup4==4.15.0
-PyYAML==6.0
+# 6.0.3, not 6.0: 6.0 has no cp312 wheel, so pip source-builds it and the
+# build dies with `AttributeError: 'build_ext' object has no attribute
+# 'cython_sources'`. 6.0.3 ships cp310..cp314 wheels. See DEPLOYMENT note above.
+PyYAML==6.0.3
 pydantic==2.13.4
 pydantic-settings==2.15.0
 python-dotenv==1.2.3
@@ -36,7 +70,10 @@ torch==2.14.0
 sentence-transformers==6.1.0
 chromadb==1.5.9
 rank-bm25==0.2.2
-numpy==1.25.2
+# 1.26.4, not 1.25.2: 1.25.2 ships cp310/cp311 wheels only, so it too would
+# source-build and fail on Python 3.12. 1.26.4 is the last numpy 1.x with a
+# cp312 wheel, so the chromadb/onnxruntime numpy-2.x exclusion still holds.
+numpy==1.26.4
 
 # --- tests ---
 pytest==9.1.1
