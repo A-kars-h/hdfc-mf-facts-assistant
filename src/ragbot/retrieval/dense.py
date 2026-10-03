@@ -20,15 +20,21 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from ..core.config import Settings, get_settings
+from ..core.errors import IndexUnavailableError
 from ..ingest.embedder import Embedder
 from .hits import Hit, hydrate
 
 log = logging.getLogger(__name__)
 
-# Cosine similarity lives in [-1, 1]. Used when the dense side produced no hits
-# at all, so that `raw_dense_max` is below any real threshold and the gate fails
-# closed. Chosen over -inf because GateDecision.raw_dense_max is serialised to
-# JSON and -inf is not valid JSON.
+# Cosine similarity lives in [-1, 1]. Used when the dense side ran and returned
+# nothing usable, so that `raw_dense_max` is below any real threshold and the gate
+# fails closed. Chosen over -inf because GateDecision.raw_dense_max is serialised
+# to JSON and -inf is not valid JSON.
+#
+# NOT used for an empty collection. That is a missing artifact rather than a
+# negative result, and `search()` raises `IndexUnavailableError` for it - see
+# below. Reusing this sentinel there is what let a deployment with no index
+# refuse every factual question as though the corpus had been searched.
 NO_DENSE_MATCH = -1.0
 
 # Over-fetch factor for the dense leg. RRF needs depth from both retrievers to
@@ -106,8 +112,20 @@ class DenseRetriever:
         collection = self.collection
 
         if collection.count() == 0:
-            log.warning("dense search against an empty collection; run ingest first")
-            return DenseResult([], NO_DENSE_MATCH, vector)
+            # An empty collection is not "no good match", it is "there is no
+            # corpus". Returning NO_DENSE_MATCH here made the gate read a missing
+            # deployment artifact as a confident negative and refuse every
+            # factual question with the out-of-corpus message - an empty index
+            # and a genuinely unmatched question became indistinguishable. This
+            # now raises; `ingest.bootstrap.ensure_index` builds the index at
+            # startup, and `IndexUnavailableError` surfaces a broken deployment
+            # as a deployment error.
+            raise IndexUnavailableError(
+                f"the Chroma collection at {self.settings.chroma_dir} is empty, "
+                f"so there is nothing to retrieve from.",
+                remediation="Run `python -m src.ragbot.ingest`, or let the app's "
+                "startup bootstrap build it from data/raw.",
+            )
 
         got = collection.query(
             query_embeddings=[vector],

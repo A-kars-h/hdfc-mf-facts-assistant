@@ -2,11 +2,16 @@
 
 This module contains no retrieval, no ranking, no threshold, no prompting, no
 generation, no output validation and no PII handling. It calls exactly one
-product function, `Ragbot.ask_with_evidence()`, and renders what comes back. If
-a rule ever needs deciding here, it belongs in `retrieval/`, `generation/` or
+product function, `Ragbot.ask_with_evidence()`, and renders what comes back. If a
+rule ever needs deciding here, it belongs in `retrieval/`, `generation/` or
 `safety/` instead, because this file is not covered by those invariants and a
-rule that lives only in the UI does not exist for the CLI, the eval harness or
-the tests.
+rule that lives only in the UI does not exist for the CLI, the eval harness or the
+tests.
+
+The one documented exception is `ensure_index()` in `_bot()`. That is a
+deployment prerequisite, not a rule about answering questions, and it is
+described where it is called. The invariant it does not break: this file decides
+nothing about whether a question gets answered.
 
 The four rules that shape the code below
 ----------------------------------------
@@ -71,6 +76,7 @@ from src.ragbot.core.errors import RagbotError  # noqa: E402
 from src.ragbot.core.logging import setup_logging  # noqa: E402
 from src.ragbot.core.models import Answer, Intent, RetrievedChunk  # noqa: E402
 from src.ragbot.generation.pipeline import Ragbot  # noqa: E402
+from src.ragbot.ingest.bootstrap import ensure_index  # noqa: E402
 
 # --- constants -----------------------------------------------------------
 
@@ -109,9 +115,25 @@ def _bot() -> Ragbot:
     collaborator, not shared per-user state. Each question re-enters
     `ask_with_evidence()`, which resets the recorded evidence before it runs, so
     nothing carries over between questions.
+
+    `ensure_index` runs first, and it is the only thing in this file that is not
+    presentation. It is here because a deployed process gets no `make ingest`
+    step: the index is a gitignored build artifact, so a fresh deployment starts
+    with an empty collection and would otherwise refuse every factual question as
+    though the corpus had been searched and found wanting. It is a startup
+    prerequisite, not question handling - no rule is decided here, and it is a
+    no-op (two stat calls) whenever the index already exists, so local runs are
+    unaffected.
+
+    If it cannot build the index it raises `IndexUnavailableError`, a
+    `RagbotError`, which `_submit` already renders as an actionable error. That
+    is the intended outcome: a deployment with no corpus must say so rather than
+    answer "not in the corpus" with confidence.
     """
     setup_logging()
-    return Ragbot(settings=Settings())
+    settings = Settings()
+    ensure_index(settings)
+    return Ragbot(settings=settings)
 
 
 # --- rendering (presentation only) ---------------------------------------

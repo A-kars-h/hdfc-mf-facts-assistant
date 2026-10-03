@@ -56,6 +56,34 @@ class ChunkTooLongError(RagbotError):
         )
 
 
+class IndexUnavailableError(RagbotError):
+    """The retrieval index does not exist, or could not be built.
+
+    Raised instead of letting an absent index present as a refusal. This is the
+    failure mode that hid a broken deployment behind a confident answer: with no
+    vectors stored, retrieval returned the `NO_DENSE_MATCH` sentinel, the gate
+    read that as "nothing in the corpus resembles this question", and the user
+    was told a fact the corpus contains is outside it.
+
+    Nothing about that output was wrong-looking and everything about it was
+    untrue - the corpus had never been searched. An empty collection is not a
+    legitimate state for this product, so it is an error, not a low score.
+
+    Distinct from `EmbeddingDimMismatchError` (the index exists but was built for
+    a different model) and from `NotCalibratedError` (no threshold). All three
+    mean "cannot answer", and all three must surface as an actionable deployment
+    message rather than as Refusal B.
+    """
+
+    def __init__(self, detail: str, *, remediation: str = "") -> None:
+        self.detail = detail
+        self.remediation = remediation
+        super().__init__(
+            f"the retrieval index is unavailable: {detail} This is a deployment "
+            f"problem, not a question the corpus cannot answer. {remediation}"
+        )
+
+
 class EmbeddingDimMismatchError(RagbotError):
     """Stored vectors do not match the active embedding model's dimension.
 

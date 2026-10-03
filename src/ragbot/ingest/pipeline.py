@@ -63,6 +63,18 @@ def run_ingest(
         {p.page_id: p for p in previous.pages} if previous else {}
     )
 
+    # Which pages the STORE actually holds, as opposed to which ones the manifest
+    # claims. Both are needed, and they are not the same question.
+    #
+    # The manifest is a record of what a previous run embedded. It is committed
+    # to the repo, while `data/chroma/` and `data/bm25.pkl` are gitignored - so a
+    # fresh deployment arrives with a manifest describing 1,193 chunks and an
+    # empty store. Trusting the manifest alone there made every page look
+    # unchanged, so the hash-skip fired on all five, nothing was embedded, and
+    # the run reported a clean 0-chunk index. The index is the thing retrieval
+    # reads, so it gets a vote.
+    indexed_pages = writer.all_page_ids()
+
     all_chunks: dict[str, list[Chunk]] = {}
 
     for page in pages:
@@ -80,10 +92,15 @@ def run_ingest(
 
             content_hash = parsed.content_hash
             prior = previous_by_page.get(page_id)
+            # Unchanged means "the store already holds these exact chunks", so it
+            # takes the hash AND the page actually being in the index. See the
+            # `indexed_pages` note above for why the second condition is not
+            # redundant.
             unchanged = (
                 prior is not None
                 and prior.content_hash == content_hash
                 and not reindex
+                and page_id in indexed_pages
             )
 
             if unchanged:

@@ -670,6 +670,12 @@ def test_the_ui_calls_only_the_orchestrator() -> None:
 
     Not the LLM client, not the validator, not the PII scanner, not the
     threshold. Each of those is a rule this module must not hold a copy of.
+
+    `src.ragbot.ingest.bootstrap` is the single deliberate exception, and it is
+    named rather than smuggled: see
+    `test_the_ui_bootstraps_the_index_and_nothing_else`. The rule being protected
+    is "the UI decides nothing about whether a question is answered", and a
+    startup prerequisite for having a corpus at all does not violate it.
     """
     modules = _imported_modules()
     for forbidden in (
@@ -679,8 +685,40 @@ def test_the_ui_calls_only_the_orchestrator() -> None:
         "src.ragbot.generation.prompts",
         "src.ragbot.safety.pii",
         "src.ragbot.ingest",
+        "src.ragbot.ingest.pipeline",
+        "src.ragbot.ingest.writer",
+        "src.ragbot.ingest.chunker",
+        "src.ragbot.ingest.clean",
+        "src.ragbot.ingest.fetch",
+        "src.ragbot.ingest.embedder",
     ):
         assert forbidden not in modules, f"the UI imported {forbidden}"
+
+
+def test_the_ui_bootstraps_the_index_and_nothing_else() -> None:
+    """Pin the one ingest call this module is allowed to make.
+
+    A deployed process never runs `make ingest`, so `_bot()` calls
+    `ensure_index()`. That is allowed; hand-rolling an ingest is not. This asserts
+    the exact symbol rather than trusting the docstring, because the failure mode
+    of a widening here is silent - the UI would start making product decisions the
+    orchestrator cannot see.
+    """
+    modules = _imported_modules()
+    assert "src.ragbot.ingest.bootstrap" in modules
+
+    called = {
+        node.id
+        for node in ast.walk(_parsed_app())
+        if isinstance(node, ast.Name)
+    } | {
+        node.attr
+        for node in ast.walk(_parsed_app())
+        if isinstance(node, ast.Attribute)
+    }
+    assert "ensure_index" in called
+    for forbidden in ("run_ingest", "ensure_raw_pages", "chunk_page", "parse_file"):
+        assert forbidden not in called, f"the UI called ingest.{forbidden} directly"
 
 
 def test_the_ui_never_streams_an_unvalidated_draft() -> None:
